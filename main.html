@@ -1,0 +1,274 @@
+<html>
+    <head>
+        <title> Animes - Main </title>
+
+
+
+        <style>
+            .subtitle {background-color: transparent; text-anchor: middle; color: white; position: relative; bottom: 0;}
+            .browser-anchor {position: fixed; left: 0;right: 0;top: 0;bottom: 0; margin: 1vw}
+            .subtitle-zone {position: fixed; bottom: 0; width: 100%}
+            .video { position: relative; margin-left: 4vw; margin-top: 4vw; margin-bottom: 4vw; margin-right: 4vw}
+            .upper-bar { position: fixed; width: 100%}
+
+            .gllobal_navi h1 {
+              display: none;
+            }
+            .gllobal_navi li a {
+              display: block;
+              width: 100%;
+              height: 100%;
+              overflow: hidden;
+              text-indent: -99999px;
+            }
+            @media only screen and (min-width: 751px) {
+              .gllobal_navi {
+                position: relative;
+                background: url("https://kimetsu.com/assets/img/menu/pc/menu_bg.jpg");
+                height: 80px;
+              }
+              .gllobal_navi:before {
+                content: url("https://kimetsu.com/assets/img/menu/pc/menu_flower_l.png");
+                position: absolute;
+                left: 0;
+                top: 0;
+              }
+              .gllobal_navi:after {
+                content: url("https://kimetsu.com/assets/img/menu/pc/menu_flower_r.png");
+                position: absolute;
+                right: 0;
+                top: 0;
+              }
+              .gllobal_navi ul {
+                text-align: center;
+                letter-spacing: -.4em;
+                padding-top: 15px;
+                position: relative;
+                z-index: 5;
+              }
+              .gllobal_navi li {
+                height: 50px;
+                position: relative;
+                display: inline-block;
+                margin: 0 8px;
+              }
+              .gllobal_navi li a {
+                background: no-repeat center bottom;
+                opacity: 0;
+              }
+              .gllobal_navi li:hover a {
+                opacity: 1;
+              }
+              .gllobal_navi li.current a {
+                opacity: 1;
+              }
+              .gllobal_navi .top {
+                background: url("https://kimetsu.com/assets/img/menu/pc/menu_top.png");
+                width: 136px;
+              }
+              .gllobal_navi .top a {
+                background-image: url("https://kimetsu.com/assets/img/menu/pc/menu_top.png");
+              }
+              .gllobal_navi .news {
+                background: url("https://kimetsu.com/assets/img/menu/pc/menu_news.png");
+                width: 96px;
+              }
+              .gllobal_navi .news a {
+                background-image: url("https://kimetsu.com/assets/img/menu/pc/menu_news.png");
+              }
+              .gllobal_navi .intro {
+                background: url("https://kimetsu.com/assets/img/menu/pc/menu_about.png");
+                width: 125px;
+              }
+              .gllobal_navi .intro a {
+                background-image: url("https://kimetsu.com/assets/img/menu/pc/menu_about.png");
+              }
+              .gllobal_navi .comic {
+                background: url("https://kimetsu.com/assets/img/menu/pc/menu_comic_info.png");
+                width: 96px;
+              }
+              .gllobal_navi .comic a {
+                background-image: url("https://kimetsu.com/assets/img/menu/pc/menu_comic_info.png");
+              }
+              .gllobal_navi .anime {
+                background: url("https://kimetsu.com/assets/img/menu/pc/menu_anime_info.png");
+                width: 106px;
+              }
+              .gllobal_navi .anime a {
+                background-image: url("https://kimetsu.com/assets/img/menu/pc/menu_anime_info.png");
+              }
+              .gllobal_navi .twitter {
+                background: url("https://kimetsu.com/assets/img/menu/pc/menu_twitter.png");
+                width: 123px;
+              }
+              .gllobal_navi .twitter a {
+                background-image: url("https://kimetsu.com/assets/img/menu/pc/menu_twitter.png");
+              }
+            }
+            @media only screen and (max-width: 750px) {
+              .gllobal_navi .sp_menu {
+                background: url("https://kimetsu.com/assets/img/menu/sp/menu_bg_sp.jpg") no-repeat center;
+                -webkit-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                height: 62px;
+                position: fixed;
+                width: 100%;
+                z-index: 150;
+              }
+              .gllobal_navi .sp_menu .menu_icon {
+                position: absolute;
+                left: 50%;
+                height: 100%;
+                top: 0;
+                width: 30px;
+                margin-left: -15px;
+              }
+              .gllobal_navi .sp_menu .menu_icon p {
+                width: 100%;
+                height: 4px;
+                background: #000;
+                position: absolute;
+                -webkit-transition: all 0.2s ease;
+                -moz-transition: all 0.2s ease;
+                -ms-transition: all 0.2s ease;
+                -o-transition: all 0.2s ease;
+                transition: all 0.2s ease;
+              }
+              .gllobal_navi .sp_menu .menu_icon p:nth-child(1) {
+                top: 34%;
+              }
+              .gllobal_navi .sp_menu .menu_icon p:nth-child(2) {
+                top: 50%;
+                margin-top: -2px;
+              }
+              .gllobal_navi .sp_menu .menu_icon p:nth-child(3) {
+                bottom: 34%;
+              }
+              .gllobal_navi .sp_menu .menu_icon.close p:nth-child(2) {
+                opacity: 0;
+              }
+              .gllobal_navi .sp_menu .menu_icon.close p:nth-child(1) {
+                -webkit-transform: rotate(45deg);
+                -moz-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                -o-transform: rotate(45deg);
+                transform: rotate(45deg);
+                top: 50%;
+              }
+              .gllobal_navi .sp_menu .menu_icon.close p:nth-child(3) {
+                -webkit-transform: rotate(-45deg);
+                -moz-transform: rotate(-45deg);
+                -ms-transform: rotate(-45deg);
+                -o-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+                bottom: auto;
+                top: 50%;
+              }
+              .gllobal_navi .global_menu {
+                background: url("../img/bg_repeat_paper.jpg") center top;
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 100;
+                padding-top: 62px;
+                overflow: hidden;
+                height: 0;
+                opacity: 0;
+                -webkit-transition: all 0.4s ease;
+                -moz-transition: all 0.4s ease;
+                -ms-transition: all 0.4s ease;
+                -o-transition: all 0.4s ease;
+                transition: all 0.4s ease;
+              }
+              .gllobal_navi .global_menu.open {
+                opacity: 1;
+                height: 100%;
+              }
+              .gllobal_navi .global_menu li {
+                margin: 0 4%;
+                height: 40px;
+                background: no-repeat center;
+                -webkit-background-size: auto 40px;
+                -o-background-size: auto 40px;
+                background-size: auto 40px;
+                padding: 10px 0;
+                border-bottom: 2px solid #b7986a;
+              }
+              .gllobal_navi .global_menu .top {
+                background-image: url("../img/menu/sp/menu_top.png");
+              }
+              .gllobal_navi .global_menu .news {
+                background-image: url("../img/menu/sp/menu_news.png");
+              }
+              .gllobal_navi .global_menu .intro {
+                background-image: url("../img/menu/sp/menu_about.png");
+              }
+              .gllobal_navi .global_menu .comic {
+                background-image: url("../img/menu/sp/menu_comic_info.png");
+              }
+              .gllobal_navi .global_menu .anime {
+                background-image: url("../img/menu/sp/menu_anime_info.png");
+              }
+              .gllobal_navi .global_menu .twitter {
+                background-image: url("../img/menu/sp/menu_twitter.png");
+              }
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <!-- <img src="" -->
+        <nav id="global_navi" class="gllobal_navi">
+            <!-- <h1>鬼滅の刃ポータルサイト</h1> -->
+            <div class="sp_menu">
+                <ul class="global_menu">
+                    <!-- <li class="top current"><a href="/">ポータルトップ</a></li> -->
+                    <li class="news "><a href="/news/">鎹鴉通信</a></li>
+                    <li class="intro "><a href="/about/">鬼滅の刃とは</a></li>
+                    <li class="comic"><a href="/comics/">原作情報</a></li>
+                    <li class="anime"><a href="/anime/">アニメ情報</a></li>
+                    <li class="twitter"><a href="https://twitter.com/kimetsu_off" target="_blank">ツイッター</a></li>
+                </ul>
+            </div>
+        </nav>
+
+            
+
+        <div class="video-container">
+            <video width="480" controls>
+                <source src="https://srv05.erai-ddl.info/2019/Spring/Kimetsu%20no%20Yaiba/%5BErai-raws%5D%20Kimetsu%20no%20Yaiba%20-%2001%20%5B720p%5D%5BMultiple%20Subtitle%5D.mkv" type="video/mp4">
+                    <track src="subtitles.vtt" kind="subtitles" srclang="en" label="English" default>
+                    <track src="subtitles.vtt" kind="subtitles" srclang="fr" label="French" default>
+
+
+
+            </video>
+        </div>
+
+        <!--<div class="browser-anchor">
+
+            <div class="video">
+                <video width="100%" height="auto" preload="auto" controls loop>
+                    <source src="https://srv05.erai-ddl.info/2019/Spring/Kimetsu%20no%20Yaiba/%5BErai-raws%5D%20Kimetsu%20no%20Yaiba%20-%2001%20%5B720p%5D%5BMultiple%20Subtitle%5D.mkv" type="video/mp4">
+                    <h1 id="subs" class="subtitle" style="text-align: center;">
+                        Testing
+                    </h1>
+                </video>
+
+
+            </div>
+
+
+            <!-- SUBTITLES ->
+            <div class="subtitle-zone">
+                <h1 id="subs" class="subtitle" style="text-align: center;">
+                    Testing
+                </h1>
+            </div>-->
+        </div>
+    </body>
+</html>
