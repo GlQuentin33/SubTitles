@@ -11,6 +11,76 @@
 		};
 	
 	window.onload = function() {
+        var path = window.location.pathname;
+        var page = path.split("/").pop();
+        console.log(page);
+        if(page == "anime.html"){
+        $.getJSON( "https://raw.githubusercontent.com/GlQuentin33/SubTitles/master/anime_list.json", function( json ) {
+            var nums = json.sizes;
+            readTextFile("https://raw.githubusercontent.com/GlQuentin33/SubTitles/master/anime_list.json", function(response)
+            {
+                nums = response.size;
+            })
+            for (let index = 0; index < nums; index++) {
+                var btn = document.createElement("button");
+                btn.innerHTML = json.animes[index].name;
+                btn.opacity='1';
+                btn.style.background = "url("+json.default_bg+")";
+                btn.style.backgroundSize = "cover";
+                btn.style.border = "hidden";
+                anime_list.appendChild(btn);
+
+                btn.addEventListener ("click", function() {
+                // alert("did something");
+                    window.location.href=json.animes[index].url;
+                  });
+            }
+            console.log( "JSON Data received, name is " + json.animes[1].name);
+            console.log( "JSON Data received, size is " + json.sizes);
+        });
+        }
+
+        var anime_list = document.getElementById("anime-list");
+        var loading = document.getElementById("kny_loading");
+        var page = document.getElementById("web-page");
+
+        loading.style.opacity = '1';
+        page.style.opacity = '0';
+        var del = 250;
+        var during = 1000;
+        
+        loading.animate([ { opacity: 1 }, { opacity: 0 } ], 
+            {
+                delay: del,
+                duration: during
+            });
+        page.animate([ { opacity: 0 }, { opacity: 1 } ], 
+            {
+                delay: del,
+                duration: during
+            });
+
+            // sleep(2200);
+            setInterval(function()
+            {
+                loading.style.opacity = '0';
+                // video.style.opacity = '1';
+                page.style.opacity = '1';
+            },
+            del+100)
+            var elem = document.getElementById("load-area");
+
+            setInterval(function()
+            {
+                loading.remove();
+                elem.remove();
+            },
+            del+during)
+            // loading.style.opacity = '0';
+
+        // loading.hidden(true)
+        // loading.opacity = 0;
+
 		hideTracks();
 		track = video.addTextTrack("captions", "English", "en");
 		track.mode = "showing";
@@ -59,6 +129,220 @@
 
 	};
 }());
+
+var isShowed = false;
+
+function showChar(char)
+{
+    var elem = document.getElementsByClassName(char)[0];
+    var child = elem.getElementsByClassName("thumb")[0];
+    var bodys = document.getElementsByClassName("chara_zone")[0];
+    // var image = child.style.background;
+
+
+
+    var charactos = document.getElementsByClassName("chara_list")[0];
+    var elems = charactos.getElementsByTagName("*");
+
+    console.log("there is : "+ elems.length);
+    for(let i=0;i<elems.length;i++){
+        elems[i].opacity='0';
+        elems[i].style.visibility = "hidden";
+    }
+
+    if(child.currentStyle){
+        var img = child.currentStyle.backgroundImage;
+    }
+    else
+    {
+        var img = getComputedStyle(child,"").getPropertyValue("background-image");
+    }
+
+    var clickBehind = document.createElement("div");
+    clickBehind.className = "clickit";
+    
+    bodys.appendChild(clickBehind);
+
+    var charaBg = document.createElement("img");
+
+    // charaBg.style.position = "relative";
+    charaBg.opacity='1';
+    charaBg.className = "character-bg";
+    charaBg.style.backgroundImage = "url('https://kimetsu.com/anime/assets/img/common/bg/bg_repeat_red.jpg')";
+    charaBg.style.backgroundSize = "contain";
+    charaBg.addEventListener("click", function(){
+        charaName.remove();
+        charaBg.remove();
+        charaInfo.remove();
+        charaHead.remove();
+        clickBehind.remove();
+        for(let i=0;i<elems.length;i++){
+            elems[i].opacity='1';
+            elems[i].style.visibility = "visible";
+        }
+    });
+    bodys.appendChild(charaBg);
+
+    var charaHead = document.createElement("div");
+
+    charaHead.className = "chara_head";
+    charaHead.style.backgroundImage = img;
+    charaHead.style.backgroundSize = "100%";
+    charaHead.opacity='1';
+    charaHead.addEventListener("click", function(){
+        charaName.remove();
+        charaBg.remove();
+        charaInfo.remove();
+        charaHead.remove();
+        clickBehind.remove();
+        for(let i=0;i<elems.length;i++){
+            elems[i].opacity='1';
+            elems[i].style.visibility = "visible";
+        }
+        
+    });
+
+    bodys.appendChild(charaHead);
+
+    var charaName = document.createElement("h1");
+
+    charaName.className = "chara_name";
+    setText(charaName,char,"name");
+    charaName.opacity='1';
+    
+    charaName.addEventListener("click", function(){
+        charaName.remove();
+        charaInfo.remove();
+        charaBg.remove();
+        charaHead.remove();
+        clickBehind.remove();
+        for(let i=0;i<elems.length;i++){
+            elems[i].opacity='1';
+            elems[i].style.visibility = "visible";
+        }
+    });
+
+    bodys.appendChild(charaName);
+
+
+    var charaInfo = document.createElement("h1");
+
+    charaInfo.className = "chara_info";
+    charaInfo.style.whiteSpace = "pre-line";
+    setText(charaInfo,char,"info");
+    charaInfo.opacity='1';
+    
+    charaInfo.addEventListener("click", function(){
+        charaName.remove();
+        charaInfo.remove();
+        charaBg.remove();
+        charaHead.remove();
+        clickBehind.remove();
+        for(let i=0;i<elems.length;i++){
+            elems[i].opacity='1';
+            elems[i].style.visibility = "visible";
+        }
+    });
+    
+
+
+    bodys.appendChild(charaInfo);
+
+    bodys.addEventListener("click", function(){
+        charaName.remove();
+        charaBg.remove();
+        charaHead.remove();
+        charaInfo.remove();
+        clickBehind.remove();
+        for(let i=0;i<elems.length;i++){
+            elems[i].opacity='1';
+            elems[i].style.visibility = "visible";
+        }
+        
+    });
+
+    closeOnClick(charaHead, charaName, charaBg, elems);
+
+/*    console.log("image = "+ img);
+
+    // img = img.replace(/(url\(|\)|")/g, '');
+    console.log("image = "+ img);*/
+    // var test = document.getElementsByClassName("urokodaki")[0];
+    // test.getElementsByClassName("thumb")[0].style.backgroundImage = img;
+
+    
+
+    // child.style.height = "250px";
+}
+
+function setText(el, char, type)
+{
+    $.getJSON( "https://raw.githubusercontent.com/GlQuentin33/SubTitles/master/chara_list.json", function( json ) {
+
+
+        // charaName.style.backgroundImage = img;
+        // charaName.style.backgroundSize = "100%";
+        if(json[char]){
+            el.innerHTML = json[char][type];
+        }
+        
+        });
+}
+
+function closeOnClick(charaHead, charaName, charaBg, elems)
+{
+
+}
+
+function topMost(htmlElement)
+{
+    var elements = document.getElementsByTagName("*");
+    var highest_index = 0;
+
+    for (var i = 0; i < elements.length - 1; i++) 
+    {
+        if (parseInt(elements[i].style.zIndex) > highest_index) 
+        {        
+            highest_index = parseInt(elements[i].style.zIndex);
+        }
+    }
+
+    htmlElement.style.zIndex = highest_index + 1;
+}
+
+function readTextFile(file, callback) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.overrideMimeType("application/json");
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4 && rawFile.status == "200") {
+            callback(rawFile.responseText);
+        }
+    }
+    rawFile.send(null);
+}
+
+function sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+      if ((new Date().getTime() - start) > milliseconds){
+        break;
+      }
+    }
+  }
+
+function getJsonData(json_file, data)
+{
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var myObj = JSON.parse(this.responseText);
+        return myObj[data];
+      }
+    };
+    xmlhttp.open("GET", json_file, true);
+    xmlhttp.send();
+}
 
 function addSub(track, time1, time2, subs)
 {
