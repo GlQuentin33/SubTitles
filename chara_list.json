@@ -1,6 +1,10 @@
 {
     "neduko":{
-        "name":"Nezuko",
-        "info":"Unknown Demon"
+        "name":"Kamado Nezuko",
+        "info":"Kamado Tanjiro's Sister.\nHis familly was attacked like others, and the blood of the demon enter in Nezuko."
+    },
+    "tanjiro":{
+        "name":"Kamado Tanjiro",
+        "info":"Kamado Tanjiro's Sister.\nHis familly was attacked like others, and the blood of the demon enter in Nezuko."
     }
 }
