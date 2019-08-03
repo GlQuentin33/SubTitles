@@ -677,29 +677,28 @@ function showChar(char)
     var charaName = document.createElement("h1");
 
     charaName.className = "chara_name";
-    setText(charaName,char,"name");
     charaName.opacity='1';
     
     charaName.addEventListener("click", function(){
-        charaName.remove();
-        charaInfo.remove();
+      charaName.remove();
+      charaInfo.remove();
         charaBg.remove();
         charaHead.remove();
         clickBehind.remove();
         for(let i=0;i<elems.length;i++){
-            elems[i].opacity='1';
-            elems[i].style.visibility = "visible";
+          elems[i].opacity='1';
+          elems[i].style.visibility = "visible";
         }
-    });
-
-    bodys.appendChild(charaName);
+      });
+      
+      bodys.appendChild(charaName);
+      setText(charaName,char,"name");
 
 
     var charaInfo = document.createElement("h1");
 
     charaInfo.className = "chara_info";
     charaInfo.style.whiteSpace = "pre-line";
-    setText(charaInfo,char,"info");
     charaInfo.opacity='1';
     
     charaInfo.addEventListener("click", function(){
@@ -709,15 +708,16 @@ function showChar(char)
         charaHead.remove();
         clickBehind.remove();
         for(let i=0;i<elems.length;i++){
-            elems[i].opacity='1';
-            elems[i].style.visibility = "visible";
+          elems[i].opacity='1';
+          elems[i].style.visibility = "visible";
         }
-    });
-    
-
-
-    bodys.appendChild(charaInfo);
-
+      });
+      
+      
+      
+      bodys.appendChild(charaInfo);
+      setText(charaInfo,char,"info");
+      
     bodys.addEventListener("click", function(){
         charaName.remove();
         charaBg.remove();
